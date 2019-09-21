@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+    PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+    "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.teadone.imgm.member.MemberMapper" >
+		
+	<insert id="join" parameterType="MemberVO">
+		insert into member 
+		values(#{MemId},#{MemPw},#{MemName},now())
+	</insert> 
+
+	<select id="duplicateCheckMem" parameterType="MemberVO" resultType="int">
+		select count(MemId) from member where MemId=#{MemId}
+	</select>
+	
+	<select id="logIn" parameterType="MemberVO" resultType="String">
+		select MemPw from member where MemId=#{MemId}
+	</select>
+	
+	<select id="findMemberId" parameterType="MemberVO" resultType="String">
+		select MemId from member where MemName=#{MemName}		
+	</select>
+	
+	<select id="findMemberPw" parameterType="MemberVO" resultType="String">
+		select MemPw from member where MemId=#{MemId} and MemName=#{MemName}
+	</select>
+	
+</mapper>

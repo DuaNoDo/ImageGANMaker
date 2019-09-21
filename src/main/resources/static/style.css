@@ -3,7 +3,9 @@
  * Copyright 2018 - HTML.Design
  * Licensed under  (Creative Commons 3.0)
  */
-
+h4 {
+  color: white;
+}
 @font-face {
     font-family: "Flaticon";
     src: url("fonts/Flaticon.eot");

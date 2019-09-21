@@ -8,9 +8,9 @@ for i in readL:
     newL.append(i)
 
 saveS = "".join(newL)
-print(saveS)
 saveF = open("D:/SpringWorks/ImageGANMaker/src/test/java/com/teadone/IGM/encode.txt", "w", encoding='utf-8')
 saveF.write(saveS)
 
+print(saveS)
 openF.close()
 saveF.close()
