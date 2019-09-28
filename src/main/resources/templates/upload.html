@@ -1,4 +1,4 @@
-<!doctype html>
+<<!doctype html>
 <!--[if IE 9]> <html class="no-js ie9 fixed-layout" lang="en"> <![endif]-->
 <!--[if gt IE 9]><!-->
 <html class="no-js " lang="en">
@@ -263,14 +263,13 @@
 					<div class="btn-wrapper">
 						<div class="text-center">
 							<div class="newsletter-widget">
-								<form class="form-block" role="search" method="post"
-									action="registPro">
+								<form class="form-block" role="search" method="post" enctype="multipart/form-data" action="UploadPro">
 									<div class="form-1">
-										<input type="text" name="MemId" class="form-control" placeholder="Email">
-										<input type="password" name="MemPw" class="form-control" placeholder="Password"> 
-											<input type="password" class="form-control" placeholder="RePassword"> 
-											<input type="text" name="MemName" class="form-control" placeholder="Name">
-
+										<input type="file" name="MemImg" id="input_imgs" class="form-control" multiple/>
+										
+										<div class="imgs_wrap">
+											
+										</div>
 										<button type="submit" class="btn btn-primary">
 											<i class="fa fa-paper-plane-o"></i>
 										</button>
@@ -400,6 +399,72 @@
 	<script src="videos/libs/swfobject.js"></script>
 	<script src="videos/libs/modernizr.video.js"></script>
 	<script src="videos/libs/video_background.js"></script>
+	
+	<script type="text/javascript" src="./js/jquery-3.1.0.min.js" charset="utf-8"></script>
+    <script type="text/javascript">
+        
+        var sel_files = [];
+ 
+        $(document).ready(function() {
+            $("#input_imgs").on("change", handleImgsFilesSelect);
+        }); 
+ 
+        function handleImgsFilesSelect(e) {
+            var files = e.target.files;
+            var filesArr = Array.prototype.slice.call(files);
+ 
+            filesArr.forEach(function(f) {
+                if(!f.type.match("image.*")) {
+                    alert("확장자는 이미지 확장자만 가능합니다.");
+                    return;
+                }
+ 
+                sel_files.push(f);
+ 
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    var img_html = "<img src=\"" + e.target.result + "\" />";
+                    $(".imgs_wrap").append(img_html);
+                }
+                reader.readAsDataURL(f);
+            });
+        }
+ 
+    </script>
+    <script type="text/javascript">
+$(function() {
+  $('button[type=submit]').click(function(e) {
+    e.preventDefault();
+    //Disable submit button
+    $(this).prop('disabled',true);
+    
+    var form = document.forms[0];
+    var formData = new FormData(form);
+    	
+    // Ajax call for file uploaling
+    var ajaxReq = $.ajax({
+      url : 'UploadPro',
+      type : 'POST',
+      data : formData,
+      cache : false,
+      contentType : false,
+      processData : false,
+  
+    // Called on success of file upload
+    ajaxReq.done(function(msg) {
+      $('input[type=file]').val('');
+      $('button[type=submit]').prop('disabled',false);
+    });
+    
+    // Called on failure of file upload
+    ajaxReq.fail(function(jqXHR) {
+      $('#alertMsg').text(jqXHR.responseText+'('+jqXHR.status+
+      		' - '+jqXHR.statusText+')');
+      $('button[type=submit]').prop('disabled',false);
+    });
+  });
+});
+</script>
 	<script>
 		jQuery(document).ready(function($) {
 			var Video_back = new video_background($("#home"), {
