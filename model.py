@@ -21,7 +21,6 @@ import math
 import csv
 import sys
 import os
-
 import keras.backend as K
 import tensorflow as tf
 
@@ -33,7 +32,7 @@ np.random.seed(seed=12345)
 
 class CycleGAN():
     def __init__(self, lr_D=2e-4, lr_G=2e-4, image_shape=(256*1, 256*1, 3),
-                 date_time_string_addition='_test', image_folder='facades'):
+                 date_time_string_addition='_test', image_folder='Upload'):
         self.img_shape = image_shape
         self.channels = self.img_shape[-1]
         self.normalization = InstanceNormalization
@@ -831,6 +830,7 @@ class CycleGAN():
         #if response == 'y':
         self.load_model_and_weights(self.G_A2B)
         self.load_model_and_weights(self.G_B2A)
+
         synthetic_images_B = self.G_A2B.predict(self.A_test)
         synthetic_images_A = self.G_B2A.predict(self.B_test)
 
@@ -838,7 +838,7 @@ class CycleGAN():
             if self.channels == 1:
                 image = image[:, :, 0]
             toimage(image, cmin=-1, cmax=1).save(os.path.join(
-                'generate_images', 'synthetic_images', domain, name))
+            "E:", "Generate", domain, name))
 
             # Test A images
         for i in range(len(synthetic_images_A)):

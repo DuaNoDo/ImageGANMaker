@@ -9,13 +9,14 @@ def load_data(nr_of_channels, batch_size=1, nr_A_train_imgs=None, nr_B_train_img
               nr_A_test_imgs=None, nr_B_test_imgs=None, subfolder='',
               generator=False, D_model=None, use_multiscale_discriminator=False, use_supervised_learning=False, REAL_LABEL=1.0):
 
-    trainA_path = os.path.join('data', subfolder, 'trainA')
-    #trainB_path = os.path.join('data', subfolder, 'trainB')
-    trainB_path =os.path.join('data', subfolder, 'trainA')
+    trainA_path = os.path.join("E:",subfolder)
 
-    testA_path =os.path.join('data', subfolder, 'trainA')
+    #trainB_path = os.path.join('data', subfolder, 'trainB')
+    trainB_path =os.path.join("E:",subfolder)
+
+    testA_path =os.path.join("E:",subfolder)
     #testB_path = os.path.join('data', subfolder, 'testB')
-    testB_path = os.path.join('data', subfolder, 'trainA')
+    testB_path = os.path.join("E:",subfolder)
 
     trainA_image_names = os.listdir(trainA_path)
     if nr_A_train_imgs != None:
@@ -56,7 +57,13 @@ def create_image_array(image_list, image_path, nr_of_channels):
                 image = np.array(Image.open(os.path.join(image_path, image_name)))
                 image = image[:, :, np.newaxis]
             else:                   # RGB image -> street view
-                image = np.array(Image.open(os.path.join(image_path, image_name)))
+
+                getImage = Image.open(os.path.join(image_path, image_name))
+                w, h = getImage.size
+                print(w, h)
+                if w != 256 and h != 256:
+                    getImage = getImage.resize((256, 256))
+                image = np.array(getImage)
             image = normalize_array(image)
             image_array.append(image)
 
