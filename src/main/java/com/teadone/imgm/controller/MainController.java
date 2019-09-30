@@ -7,7 +7,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
 import com.teadone.imgm.image.ImageService;
 import com.teadone.imgm.image.ImageVO;
 import com.teadone.imgm.member.MemberService;
