@@ -6,7 +6,7 @@
 		
 	<insert id="insertImage" parameterType="ImageVO">
 		insert into image 
-		values(#{MemId},#{OriginalName},#{SaveName},now())
+		values(null,#{MemId},#{OriginalName},#{SaveName},now())
 	</insert> 
 	
 </mapper>

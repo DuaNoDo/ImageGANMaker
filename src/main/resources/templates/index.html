@@ -97,17 +97,13 @@
                                     <li><a href="#">Menu Example 06</a></li>
                                 </ul>
                             </li>
-                            <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Blog <span class="fa fa-angle-down"></span></a>
-                                <ul class="dropdown-menu">
-                                    <li><a href="#">Menu Example 01</a></li>
-                                    <li><a href="#">Menu Example 02</a></li>
-                                    <li><a href="#">Menu Example 03</a></li>
-                                    <li><a href="#">Menu Example 04</a></li>
-                                    <li><a href="#">Menu Example 05</a></li>
-                                    <li><a href="#">Menu Example 06</a></li>
-                                </ul>
-                            </li>
+                            <li class="dropdown"><a href="#" class="dropdown-toggle"
+								data-toggle="dropdown" role="button" aria-haspopup="true"
+								aria-expanded="false">Blog <span class="fa fa-angle-down"></span></a>
+								<ul class="dropdown-menu">
+									<li><a href="blog.naver.com/teadone">Developer's blog</a></li>
+									<li><a href="https://github.com/DuaNoDo">Github</a></li>
+								</ul></li>
                             <li><a href="#">Contact</a></li>
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
@@ -266,25 +262,22 @@
                 <div class="row">
                     <div class="col-lg-4 col-md-12">
                         <div class="service-box m30">
-                            <i class="flaticon-monitor"></i>
-                            <h3>Outstanding design</h3>
-                            <p>Designed to be flexible according to all your needs. Create your site with all module position.</p>
+                            <h3>쉽고 빠른 생성</h3>
+                            <p>기본 이미지를 8비트 픽셀 이미지로 바꿔줍니다! 하지만 이것이 머신러닝을 통해 생성한 것입니다!.</p>
                         </div>
                     </div><!-- end col -->
 
                     <div class="col-lg-4 col-md-12">
                         <div class="service-box m30">
-                            <i class="flaticon-technology"></i>
-                            <h3>Responsive Layout</h3>
-                            <p>Genius template can be easily viewed on any mobile device. Smoothly responsive.</p>
+                            <h3>파이썬 + Spring의 조합!</h3>
+                            <p>겁나 쉬워보이지만 이거저거 붙일때 굉장히 역겨웠습니다!</p>
                         </div>
                     </div><!-- end col -->
 
                     <div class="col-lg-4 col-md-12">
                         <div class="service-box m30">
-                            <i class="flaticon-gears"></i>
-                            <h3>Easy to use</h3>
-                            <p>The modules we have prepared are simple to use. No code information is needed.</p>
+                            <h3>어떻게 돌아가는 몰라도 됩니다!.</h3>
+                            <p>단지 회원가입 로그인 그리고 이미지 업로드만 하면 20초내로 새로운 이미지가 생성됩니다!</p>
                         </div>
                     </div><!-- end col -->
                 </div><!-- end row -->
@@ -322,185 +315,28 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="portfolio row with-desc">
-                            <div class="post-media pitem item-w1 item-h1 cat1">
+                            
+                            <div th:each="image : ${gImg}" class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_01.png" alt="" class="img-responsive">
+                                    <img th:src="${image}" alt="없는 이미지넹" class="img-responsive">
                                     <div class="magnifier">
                                         <a class="golink" href="#">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Plumeria Logo Design</a></h4>
-                                    <p>Interdum et malesuada fames ac ante ipsum primis in faucibus. Sed sed. </p>
-                                </div>
                             </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
+                            <div  class="post-media pitem item-w1 item-h1 cat1">
                                 <div class="entry">
-                                    <img src="images/upload/desc_work_02.png" alt="" class="img-responsive">
+                                    <img src="" alt="없는 이미지넹" class="img-responsive">
                                     <div class="magnifier">
                                         <a class="golink" href="#">
                                            <i class="fa fa-link"></i>
                                         </a>
                                     </div><!-- end magnifier -->
                                 </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Back to Life</a></h4>
-                                    <p>Aliquam erat volutpat. Donec pharetra imperdiet metus, eget cras.</p>
-                                </div>
                             </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_03.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Creative Share App</a></h4>
-                                    <p>Aenean consectetur semper lorem, sit amet volutpat. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat4">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_04.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Luana 3D Max</a></h4>
-                                    <p>Nunc vitae metus sagittis, pharetra risus non, luctus ligula volutpat. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_05.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Custom M Logo</a></h4>
-                                    <p>Proin non mollis orci, quis maximus nisi. In imperdiet neque eu metus. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_06.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Internal App Project</a></h4>
-                                    <p>Etiam fermentum, urna sed varius aliquet, sem enim ultrices arcu amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_07.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Audio Player App</a></h4>
-                                    <p>Ut convallis mollis est, eu tincidunt magna varius dignissim. Sed sed.</p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat4">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_08.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Geek Vector Design</a></h4>
-                                    <p>Ut porttitor aliquet auctor. Donec pellentesque libero et mattis amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_09.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Sweet Admin Dashboard</a></h4>
-                                    <p>Aliquam quis euismod metus, vitae iaculis ipsum. Aliquam non enim sed.</p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_10.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Smooth Keyboard Design</a></h4>
-                                    <p>Nunc aliquet mi ante. Nulla magna ante, porttitor in sagittis posuere. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat2">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_11.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Click Smart App</a></h4>
-                                    <p>Vivamus mattis sit amet ipsum vitae pretium. Proin vitae nulla nullam. </p>
-                                </div>
-                            </div><!-- end post-media -->
-
-                            <div class="post-media pitem item-w1 item-h1 cat3">
-                                <div class="entry">
-                                    <img src="images/upload/desc_work_12.png" alt="" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                                <div class="item-desc">
-                                    <h4><a href="#">Gabfire Vector Logo</a></h4>
-                                    <p>Maecenas nisl magna, ultricies lobortis tortor vel, dapibus cras amet. </p>
-                                </div>
-                            </div><!-- end post-media -->
+                            
                         </div><!-- end row -->
                     </div><!-- end col -->
                 </div><!-- end row -->

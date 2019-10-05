@@ -837,8 +837,10 @@ class CycleGAN():
         def save_image(image, name, domain):
             if self.channels == 1:
                 image = image[:, :, 0]
+            print(os.path.join(
+            "src","main","resources", "static", "Generate", domain))
             toimage(image, cmin=-1, cmax=1).save(os.path.join(
-            "E:", "Generate", domain, name))
+            "src","main","resources", "static", "Generate", domain, name))
 
             # Test A images
         for i in range(len(synthetic_images_A)):

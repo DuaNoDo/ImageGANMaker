@@ -2,6 +2,7 @@ package com.teadone.imgm.image;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 import org.apache.commons.io.FilenameUtils;
@@ -9,6 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.teadone.imgm.util.GetFileList;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -54,13 +58,26 @@ public class ImageService implements ImageMapper {
 				sum+= insertImage(vo);
 			}
 		}
+		try {
+			Process process=Runtime.getRuntime().exec("cmd.exe /c start test.bat");
+		} catch (IOException e) {
+			log.debug(e.toString());
+			e.printStackTrace();
+		}
+		
 		return sum;
 	}
-
+	
 	@Override
 	public int insertImage(ImageVO vo) {
 
 		return mapper.insertImage(vo);
+	}
+	
+	@Override
+	public List<File> getImageList(String directory){
+		return Collections.emptyList();
+		//return GetFileList.getImgFileList(new File(directory));
 	}
 
 }

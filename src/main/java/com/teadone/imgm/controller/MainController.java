@@ -1,8 +1,13 @@
 package com.teadone.imgm.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -11,6 +16,8 @@ import com.teadone.imgm.image.ImageService;
 import com.teadone.imgm.image.ImageVO;
 import com.teadone.imgm.member.MemberService;
 import com.teadone.imgm.member.MemberVO;
+import com.teadone.imgm.util.GetFileList;
+
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -22,7 +29,10 @@ public class MainController {
 	@Autowired
 	private ImageService imgservice;
 	@GetMapping(value = { "/", "index" })
-	public String home() {
+	public String home(ModelMap modelmap) throws IOException {
+		List<String> f=GetFileList.getImgFileList("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate");
+		modelmap.put("gImg",f);
+		
 		return "index";
 	}
 	@GetMapping(value = { "/login" })

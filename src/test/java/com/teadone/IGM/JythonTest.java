@@ -1,19 +1,22 @@
 package com.teadone.IGM;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
-import lombok.extern.slf4j.Slf4j;
-import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
-import java.io.InputStreamReader;
-import com.teadone.imgm.util.StreamGobbler; 
+
+import org.junit.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+import com.teadone.imgm.util.GetFileList;
+import com.teadone.imgm.util.StreamGobbler;
+
+import lombok.extern.slf4j.Slf4j; 
+
 @Slf4j
 @SpringBootTest
 public class JythonTest {
 
-	@Test
+	
+	
 	public void contextLoads() throws IOException {
 		
 		 //Process p =Runtime.getRuntime().exec("python D:/SpringWorks/ImageGANMaker/src/test/java/com/teadone/IGM/test.py"); 
@@ -47,10 +50,13 @@ public class JythonTest {
 		   }finally{
 		    if(p != null) p.destroy();
 		   }
-		 
-
-
-		 
-		 
 	}	
+	
+	@Test
+	public void ImageGetListTest() throws IOException{
+		log.info("HELLO WORLD");
+		for(String f :  GetFileList.getImgFileList("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate")) {
+			log.info(f.toString());
+		};
+	}
 }
