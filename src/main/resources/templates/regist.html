@@ -163,55 +163,32 @@
 									<li><a href="#">Menu Example 06</a></li>
 								</ul>
 							</div></li>
-						<li class="child-menu"><a href="#">Generated Image <i
-								class="fa fa-angle-right"></i></a>
-							<div class="sub-menu-wrapper">
-								<ul class="sub-menu center-content">
-									<li><a href="#">My Image <i class="fa fa-angle-right"></i></a>
-										<div class="subsub-menu-wrapper">
-											<ul class="subsub-menu center-content">
-												<li><a href="#">Menu Example 01</a></li>
-												<li><a href="#">Menu Example 02</a></li>
-												<li><a href="#">Menu Example 03</a></li>
-												<li><a href="#">Menu Example 04</a></li>
-											</ul>
-										</div></li>
-									<li><a href="#">Recent Image <i
-											class="fa fa-angle-right"></i></a>
-										<div class="subsub-menu-wrapper">
-											<ul class="subsub-menu center-content">
-												<li><a href="#">Menu Example 01</a></li>
-												<li><a href="#">Menu Example 02</a></li>
-												<li><a href="#">Menu Example 03</a></li>
-												<li><a href="#">Menu Example 04</a></li>
-												<li><a href="#">Menu Example 05</a></li>
-												<li><a href="#">Menu Example 06</a></li>
-											</ul>
-										</div></li>
-									<li><a href="#">Favorite Image <i
-											class="fa fa-angle-right"></i></a>
-										<div class="subsub-menu-wrapper">
-											<ul class="subsub-menu center-content">
-												<li><a href="#">Menu Example 01</a></li>
-												<li><a href="#">Menu Example 02</a></li>
-												<li><a href="#">Menu Example 03</a></li>
-												<li><a href="#">Menu Example 04</a></li>
-												<li><a href="#">Menu Example 05</a></li>
-												<li><a href="#">Menu Example 06</a></li>
-											</ul>
-										</div></li>
-								</ul>
-							</div></li>
+						<li class="child-menu"><a href="#">Generated Image <i class="fa fa-angle-right"></i></a>
+                            <div class="sub-menu-wrapper">
+                                <ul class="sub-menu center-content">
+                                    <li><a href="#">My Image <i class="fa fa-angle-right"></i></a> 
+                                        <div class="subsub-menu-wrapper">  
+                                            <ul class="subsub-menu center-content">
+                                                <li><a href="myImage">MY Image</a></li>
+                                                <li><a href="myGenerateImage">MY Generate Image</a></li>
+                                                <li><a href="myBestImage">MY Best Image</a></li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                    <li><a href="recentImage">Recent Image <i class="fa fa-angle-right"></i></a> 
+                                    </li>
+                                    <li><a href="favoriteImage">Favorite Image <i class="fa fa-angle-right"></i></a> 
+
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
 						<li class="child-menu"><a href="#">Blog <i
 								class="fa fa-angle-right"></i></a>
 							<div class="sub-menu-wrapper">
 								<ul class="sub-menu center-content">
-									<li><a href="#">Menu Example 01</a></li>
-									<li><a href="#">Menu Example 02</a></li>
-									<li><a href="#">Menu Example 03</a></li>
-									<li><a href="#">Menu Example 04</a></li>
-									<li><a href="#">Menu Example 05</a></li>
-									<li><a href="#">Menu Example 06</a></li>
+									<li><a href="https://blog.naver.com/teadone">Developer's blog</a></li>
+									<li><a href="https://github.com/DuaNoDo">Github</a></li>
 								</ul>
 							</div></li>
 						<li><a th:href="${session.user==null}? @{login} : @{mypage}">
@@ -256,77 +233,35 @@
 			<div class="home-text-wrapper relative container">
 				<h2 font-color="white">REGIST</h2>
 				<div class="home-message">
-					<!-- <div class="btn-wrapper">
+					<div class="btn-wrapper">
 						<div class="text-center">
 							<div class="newsletter-widget">
 								<form class="form-block" role="search" method="post"
 									action="registPro">
 									<div class="form-1">
 										<input type="text" name="MemId" class="form-control" placeholder="Email">
+										
+										<span id="IdCheck">Impossible ID</span>
+										<br><br>
 										<input type="password" name="MemPw" class="form-control" placeholder="Password"> 
-											<input type="password" class="form-control" placeholder="RePassword"> 
-											<input type="text" name="MemName" class="form-control" placeholder="Name">
-
-										<button type="submit" class="btn btn-primary">
+										<br>
+										<br>
+										<input type="password" class="form-control" placeholder="RePassword"> 
+										
+										<span id="PwCheck">Wrong password</span>
+										<br><br>
+										<input type="text" name="MemName" class="form-control" placeholder="Name">
+										<br>
+										<br>
+										<button type="submit" class="btn">
 											<i class="fa fa-paper-plane-o"></i>
 										</button>
 									</div>
 								</form>
 							</div>
 						</div>
-					</div> -->
+					</div>
 					<!-- end row -->
-					
-					<form class="form-horizontal" action='registPro' method="POST">
-					  <fieldset>
-					    <div id="legend">
-					      <legend class="">Register</legend>
-					    </div>
-					    <div class="control-group">
-					      <!-- Username -->
-					      <label class="control-label"  for="username">Username</label>
-					      <div class="controls">
-					        <input type="text" id="username" name="MemId" placeholder="" class="input-xlarge">
-					        <h4 class="help-block">Username can contain any letters or numbers, without spaces</h4>
-					      </div>
-					    </div>
-					 
-					    <div class="control-group">
-					      <!-- E-mail -->
-					      <label class="control-label" for="email">E-mail</label>
-					      <div class="controls">
-					        <input type="text" id="email" name="MemMail" placeholder="" class="input-xlarge">
-					        <h4 class="help-block">Please provide your E-mail</h4>
-					      </div>
-					    </div>
-					 
-					    <div class="control-group">
-					      <!-- Password-->
-					      <label class="control-label" for="password">Password</label>
-					      <div class="controls">
-					        <input type="password" id="password" name="MemPW" placeholder="" class="input-xlarge">
-					        <h4 class="help-block">Password should be at least 4 characters</h4>
-					      </div>
-					    </div>
-					 
-					    <div class="control-group">
-					      <!-- Password -->
-					      <label class="control-label"  for="password_confirm">Password (Confirm)</label>
-					      <div class="controls">
-					        <input type="password" id="password_confirm" name="MemPWRe" placeholder="" class="input-xlarge">
-					        <h4 class="help-block">Please confirm password</h4>
-					      </div>
-					    </div>
-					 
-					    <div class="control-group">
-					      <!-- Button -->
-					      <div class="controls">
-					        <button class="btn btn-success">Register</button>
-					      </div>
-					    </div>
-					  </fieldset>
-					</form>
-					<!-- end -->
 				</div>
 			</div>
 		</div>

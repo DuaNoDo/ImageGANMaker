@@ -9,5 +9,5 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 public interface ImageMapper {
 	public int fileUpload(MultipartHttpServletRequest multipartHttpServletRequest,ImageVO vo);
 	public int  insertImage(ImageVO vo);
-	public List<File> getImageList(String directory);
+	public List<String> getImageList(ImageVO vo);
 }

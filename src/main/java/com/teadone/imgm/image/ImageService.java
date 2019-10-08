@@ -73,11 +73,12 @@ public class ImageService implements ImageMapper {
 
 		return mapper.insertImage(vo);
 	}
-	
+
 	@Override
-	public List<File> getImageList(String directory){
-		return Collections.emptyList();
-		//return GetFileList.getImgFileList(new File(directory));
+	public List<String> getImageList(ImageVO vo) {
+		
+		return mapper.getImageList(vo);
 	}
+	
 
 }

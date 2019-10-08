@@ -87,4 +87,12 @@ public class MainController {
 		else
 			return "login";
 	}
+	@GetMapping(value="myImage")
+	public String myImage(ModelMap model,HttpSession session) {
+		ImageVO vo=new ImageVO();
+		vo.setMemId(session.getAttribute("user").toString());
+		model.put("gmImg", imgservice.getImageList(vo));
+		
+		return "myImage";
+	}
 }

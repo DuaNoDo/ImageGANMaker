@@ -8,5 +8,8 @@
 		insert into image 
 		values(null,#{MemId},#{OriginalName},#{SaveName},now())
 	</insert> 
-	
+	<select id="getImageList" parameterType="ImageVO" resultType="String">
+		select concat('Upload/' ,SaveName) from image
+		where MemId=#{MemId}
+	</select>
 </mapper>

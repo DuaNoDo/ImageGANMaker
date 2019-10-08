@@ -6,6 +6,7 @@ import lombok.Data;
 
 @Data
 public class ImageVO {
+	private String ImgNum;
 	private String MemId;
 	private String[] MemImg;
 	private String OriginalName;

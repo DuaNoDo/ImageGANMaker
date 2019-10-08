@@ -31,7 +31,7 @@ public class GetFileList {
         	.map(p ->{
         		String absPath = p.toAbsolutePath().toString();
         		//replcae 
-        		log.debug(absPath);
+        		
         		return absPath.replace("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\", "");
         	})
     		.collect(Collectors.toList());            
