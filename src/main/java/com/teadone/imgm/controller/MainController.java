@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+
+import com.teadone.imgm.board.BoardService;
 import com.teadone.imgm.image.ImageService;
 import com.teadone.imgm.image.ImageVO;
 import com.teadone.imgm.member.MemberService;
@@ -28,6 +30,8 @@ public class MainController {
 	private MemberService service;
 	@Autowired
 	private ImageService imgservice;
+	@Autowired
+	private BoardService boardservice;
 	@GetMapping(value = { "/", "index" })
 	public String home(ModelMap modelmap) throws IOException {
 		List<String> f=GetFileList.getImgFileList("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate");
@@ -94,5 +98,20 @@ public class MainController {
 		model.put("gmImg", imgservice.getImageList(vo));
 		
 		return "myImage";
+	}
+	
+	@GetMapping(value="board")
+	public String board(ModelMap model) {
+		
+		model.put("post", boardservice.getPosts());
+		return "board";
+	}
+	@GetMapping(value="boardWrite")
+	public String boardWrite(HttpSession session) {
+		if(session.getAttribute("user") != null) {
+			return "boardWirte";
+		}
+		else
+			return "login";
 	}
 }
