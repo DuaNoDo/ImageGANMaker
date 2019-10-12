@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,4 +37,30 @@ public class GetFileList {
         	})
     		.collect(Collectors.toList());            
     }
+    public static List<String> getRecentFileList(String path, List<String> gFileList) throws IOException{
+    	
+   
+    	return Files.walk(Paths.get(path))
+    		.filter(Files::isRegularFile)
+    		.filter(  p -> {
+    			for(String s : gFileList) {
+    				s=s.substring(7).replace(".png","");
+    				if(p.toString().contains(s)) {
+    					return true;
+    				} 
+    			}
+    			return false;
+    		})
+    		.filter(p -> {
+    			String fName = p.toFile().getName().toLowerCase();    
+    			return fName.endsWith(".jpg") || fName.endsWith(".png") || fName.endsWith(".gif");
+    		})
+        	.map(p ->{
+        		String absPath = p.toAbsolutePath().toString();
+
+        		return absPath.replace("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\", "");
+        	})
+    		.collect(Collectors.toList());            
+    }
+    
 }

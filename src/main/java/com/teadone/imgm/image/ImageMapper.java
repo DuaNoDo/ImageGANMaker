@@ -10,4 +10,5 @@ public interface ImageMapper {
 	public int fileUpload(MultipartHttpServletRequest multipartHttpServletRequest,ImageVO vo);
 	public int  insertImage(ImageVO vo);
 	public List<String> getImageList(ImageVO vo);
+	//public List<String> getRecentImageList(String path, ImageVO vo);
 }

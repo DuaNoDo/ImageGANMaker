@@ -12,4 +12,6 @@
 		select concat('Upload/' ,SaveName) from image
 		where MemId=#{MemId}
 	</select>
+	
+	
 </mapper>

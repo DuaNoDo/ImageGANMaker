@@ -212,33 +212,13 @@
 		            <h2 class="ui teal image header">
 		                게시판
 		            </h2>
-		            <div class="ui large form">
-		                <div class="ui stacked segment">
-		                    <a href="/boardWrite"><button class="ui fluid large teal submit button">게시글 작성하기</button></a>
-		                    <table class="ui celled table">
-		                        <thead>
-		                            <tr>
-		                                <th>#</th>
-		                                <th>제목</th>
-		                                <th>등록자</th>
-		                                <th>등록일</th>
-		                                <th>조회수</th>
-		                            </tr>
-		                        </thead>
-		                        <tbody id="list">
-			                        <tr th:each="post : ${post}">
-			                        	<th><span th:text="${post.num}"></span></th>
-			                        	<th><span th:text="${post.title}"></span></th>
-			                        	<th><span th:text="${post.MemId}"></span></th>
-			                        	<th><span th:text="${post.RegTime}"></span></th>
-			                        	<th><span th:text="${post.read}"></span></th>
-			                        </tr>
-		                        </tbody>
-		                    </table>
-		                </div>
-		 
-		                <div class="ui error message"></div>
-		 
+		            <div>
+		            	<form method="post" enctype="multipart/form-data" action="/writePost">
+		            		<input type="text" name="title">
+		            		<input type="text" name="content">
+							<input type="file" name="image" size=40>
+							<input type="submit" value="업로드"><br><br>
+						</form>
 		            </div>
 		        </div>
 		    </div>

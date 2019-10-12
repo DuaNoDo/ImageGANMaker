@@ -129,17 +129,16 @@
 		<!-- end mobile-menu -->
 
 		<header class="vertical-header">
-			<div class="vertical-header-wrapper">
-				<nav class="nav-menu">
-					<div class="logo">
-						<a href="/"><img src="images/logo.png" alt=""></a>
-					</div>
-					<!-- end logo -->
+            <div class="vertical-header-wrapper">
+                <nav class="nav-menu">
+                    <div class="logo">
+                        <a href="/"><img src="images/logo.png" alt=""></a>
+                    </div><!-- end logo -->
 
-					<div class="margin-block"></div>
+                    <div class="margin-block"></div>
 
-					<ul class="primary-menu">
-						<li class="child-menu"><a href="#">Home <i class="fa fa-angle-right"></i></a>
+                    <ul class="primary-menu">
+                        <li class="child-menu"><a href="#">Home <i class="fa fa-angle-right"></i></a>
                             <div class="sub-menu-wrapper">
                                 <ul class="sub-menu center-content">
                                     <li><a href="/board">Board</a></li>
@@ -151,19 +150,16 @@
                                 </ul>
                             </div>
                         </li>
-						<li class="child-menu"><a href="#">Generate Image <i
-								class="fa fa-angle-right"></i></a>
-							<div class="sub-menu-wrapper">
-								<ul class="sub-menu center-content">
-									<li><a href="#">Menu Example 01</a></li>
-									<li><a href="#">Menu Example 02</a></li>
-									<li><a href="#">Menu Example 03</a></li>
-									<li><a href="#">Menu Example 04</a></li>
-									<li><a href="#">Menu Example 05</a></li>
-									<li><a href="#">Menu Example 06</a></li>
-								</ul>
-							</div></li>
-						<li class="child-menu"><a href="#">Generated Image <i class="fa fa-angle-right"></i></a>
+                        <li class="child-menu"><a href="#">Upload <i class="fa fa-angle-right"></i></a>
+                            <div class="sub-menu-wrapper">
+                                <ul class="sub-menu center-content">
+                                    <li><a href="upload">Upload Image</a></li>
+                                    <li><a href="#">My Upload History</a></li>
+                                    <li><a href="#">My Result</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="child-menu"><a href="#">Generated Image <i class="fa fa-angle-right"></i></a>
                             <div class="sub-menu-wrapper">
                                 <ul class="sub-menu center-content">
                                     <li><a href="#">My Image <i class="fa fa-angle-right"></i></a> 
@@ -183,46 +179,43 @@
                                 </ul>
                             </div>
                         </li>
-						<li class="child-menu"><a href="#">Blog <i
-								class="fa fa-angle-right"></i></a>
-							<div class="sub-menu-wrapper">
-								<ul class="sub-menu center-content">
-									<li><a href="https://blog.naver.com/teadone">Developer's blog</a></li>
+                        <li class="child-menu"><a href="#">Blog <i class="fa fa-angle-right"></i></a>
+                            <div class="sub-menu-wrapper">
+                                <ul class="sub-menu center-content">
+                                    <li><a href="https://blog.naver.com/teadone">Developer's blog</a></li>
 									<li><a href="https://github.com/DuaNoDo">Github</a></li>
-								</ul>
-							</div></li>
-						<li><a th:href="${session.user==null}? @{login} : @{mypage}">
-								<span th:text="${session.user==null}? 'LOGIN' : ${session.user}"></span>
-						</a></li>
-						<li><a th:href="${session.user==null}? @{regist} : @{logout}">
-								<span th:text="${session.user==null}? 'REGIST' : 'LOG OUT'"></span>
-						</a></li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+							<a th:href="${session.user==null}? @{login} : @{mypage}">
+                        		<span th:text="${session.user==null}? 'LOGIN' : ${session.user}"></span>
+                        	</a>
+						</li>
+                    	<li>
+                        	<a th:href="${session.user==null}? @{regist} : @{logout}">
+                        		<span th:text="${session.user==null}? 'REGIST' : 'LOG OUT'"></span>
+                        	</a>
+                        </li>    
 					</ul>
+                    
+                    <div class="margin-block"></div>
 
-					<div class="margin-block"></div>
+                    <div class="menu-search">
+                        <form>
+                            <div class="form-group">
+                                <input type="text" class="form-control" placeholder="What you are looking?">
+                                <button class="btn btn-primary"><i class="fa fa-search"></i></button>
+                            </div>
+                        </form>
+                    </div><!-- end menu-search -->
 
-					<div class="menu-search">
-						<form>
-							<div class="form-group">
-								<input type="text" class="form-control"
-									placeholder="What you are looking?">
-								<button class="btn btn-primary">
-									<i class="fa fa-search"></i>
-								</button>
-							</div>
-						</form>
-					</div>
-					<!-- end menu-search -->
+                    <div class="margin-block"></div>
 
-					<div class="margin-block"></div>
-
-					<!-- end menu -->
-				</nav>
-				<!-- end nav-menu -->
-			</div>
-			<!-- end vertical-header-wrapper -->
-		</header>
-		<!-- end header -->
+                    <!-- end menu -->
+                </nav><!-- end nav-menu -->
+            </div><!-- end vertical-header-wrapper -->
+        </header><!-- end header -->
 	</div>
 	<!-- end menu-wrapper -->
 

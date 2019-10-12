@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.teadone.imgm.board.BoardService;
+import com.teadone.imgm.board.BoardVO;
 import com.teadone.imgm.image.ImageService;
 import com.teadone.imgm.image.ImageVO;
 import com.teadone.imgm.member.MemberService;
@@ -93,11 +94,16 @@ public class MainController {
 	}
 	@GetMapping(value="myImage")
 	public String myImage(ModelMap model,HttpSession session) {
-		ImageVO vo=new ImageVO();
-		vo.setMemId(session.getAttribute("user").toString());
-		model.put("gmImg", imgservice.getImageList(vo));
+		if(session!=null) {
+			ImageVO vo=new ImageVO();
+			vo.setMemId(session.getAttribute("user").toString());
+			model.put("gmImg", imgservice.getImageList(vo));
 		
-		return "myImage";
+			return "myImage";
+		}
+		else {
+			return "login";
+		}
 	}
 	
 	@GetMapping(value="board")
@@ -106,12 +112,46 @@ public class MainController {
 		model.put("post", boardservice.getPosts());
 		return "board";
 	}
+	
 	@GetMapping(value="boardWrite")
 	public String boardWrite(HttpSession session) {
 		if(session.getAttribute("user") != null) {
-			return "boardWirte";
+			return "boardWrite";
 		}
 		else
 			return "login";
+	}
+	@RequestMapping(value="/writePost" , method= {RequestMethod.POST,RequestMethod.GET})
+	public String writePost(MultipartHttpServletRequest multipartHttpServletRequest,HttpSession session,BoardVO vo) {
+		if(session!=null) {	
+			vo.setMemId(session.getAttribute("user").toString());
+			log.debug(Integer.toString(boardservice.writePost(vo)));
+			
+			return "redirect:/";
+		}
+		else
+			return "login";
+	}
+	
+	@GetMapping(value="recentImage")
+	public String recentImage(ModelMap model,HttpSession session) {
+		
+		//model.put("gmImg", imgservice.getRecentImageList());
+		
+		return "myImage";
+	}
+	
+	@GetMapping(value="myGenerateImage")
+	public String myGenerateImage(ModelMap model,HttpSession session) throws IOException {
+		if(session!=null) {
+			ImageVO vo=new ImageVO();
+			vo.setMemId(session.getAttribute("user").toString());
+			//model.put("gmImg", imgservice.getRecentImageList("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate",vo));
+			model.put("gmImg",GetFileList.getRecentFileList("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate",imgservice.getImageList(vo)));
+			return "myGenerateImage";
+		}
+		else {
+			return "login";
+		}
 	}
 }

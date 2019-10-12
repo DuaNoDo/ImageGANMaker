@@ -5,8 +5,8 @@
 <mapper namespace="com.teadone.imgm.board.BoardMapper" >
 		
 	<insert id="writePost" parameterType="BoardVO">
-		insert into image 
-		values(null,#{title},#{content},#{MemId},null,#{OriginalName},#{SaveName},now())
+		insert into board 
+		values(null,#{MemId},#{title},#{content},null,#{OriginalName},#{SaveName},now())
 	</insert> 
 	<select id="getPosts" parameterType="BoardVO" resultType="BoardVO">
 		select * from board
