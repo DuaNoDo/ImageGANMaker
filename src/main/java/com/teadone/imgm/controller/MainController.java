@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -20,6 +21,7 @@ import com.teadone.imgm.image.ImageVO;
 import com.teadone.imgm.member.MemberService;
 import com.teadone.imgm.member.MemberVO;
 import com.teadone.imgm.util.GetFileList;
+
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -153,5 +155,13 @@ public class MainController {
 		else {
 			return "login";
 		}
+	}
+	@RequestMapping(value = "/board/{num}")
+	public String getContent(@PathVariable int num, ModelMap model) {
+		BoardVO vo = new BoardVO();
+		vo.setNum(num);
+		model.put("post",boardservice.getPost(vo));
+
+		return "content";
 	}
 }

@@ -34,7 +34,8 @@
 		<script src="js/vendor/html5shiv.min.js"></script>
 		<script src="js/vendor/respond.min.js"></script>
 	<![endif]-->
-
+	
+	
 </head>
 <body class="left-menu">  
     
@@ -212,24 +213,18 @@
 		            <h2 class="ui teal image header">
 		                게시판
 		            </h2>
-		            <div>
-		            	<form method="post" enctype="multipart/form-data" action="/writePost">
+		            
+		             <div>
+		            	<form method="post" name="newForm" enctype="multipart/form-data" action="/writePost">
 		            		<input type="text" name="title">
-		            		<input type="text" name="content">
-							<input type="file" name="image" size=40>
-							<input type="submit" value="업로드"><br><br>
+		            		<textarea name="content" id="ir1" rows="10" cols="100"></textarea>
+							
+							<input type="button" Onclick="submitContents()" value="업로드"><br><br>
 						</form>
 		            </div>
 		        </div>
 		    </div>
         </div>
-
-        
-
-
-        
-        
-        
 
         <div class="section copyrights">
             <div class="container">
@@ -264,6 +259,19 @@
     <script src="videos/libs/swfobject.js"></script> 
     <script src="videos/libs/modernizr.video.js"></script> 
     <script src="videos/libs/video_background.js"></script> 
+    <script type="text/javascript" th:src="@{/se2/js/service/HuskyEZCreator.js}" charset="utf-8"></script>
+    <script type="text/javascript">
+    
+	var oEditors = [];
+	nhn.husky.EZCreator.createInIFrame({
+	 oAppRef: oEditors,
+	 elPlaceHolder: "ir1",
+	 sSkinURI: "/se2/SmartEditor2Skin.html",
+	 fCreator: "createSEditor2"
+	});
+	</script>
+	
+	
     <script>
         jQuery(document).ready(function($) {
             var Video_back = new video_background($("#home"), { 
@@ -279,6 +287,22 @@
             });
         });
     </script>
+    <script type="text/javascript">
+ 	// ‘저장’ 버튼을 누르는 등 저장을 위한 액션을 했을 때 submitContents가 호출된다고 가정한다.
+    function submitContents() {
+     // 에디터의 내용이 textarea에 적용된다.
+     oEditors.getById["ir1"].exec("UPDATE_CONTENTS_FIELD", []);
+
+     // 에디터의 내용에 대한 값 검증은 이곳에서
+     // document.getElementById("ir1").value를 이용해서 처리한다.
+
+     try {
+    	 document.newForm.submit();
+
+     } catch(e) {}}
+ 	
+    </script>
+    
 
 </body>
 </html>
