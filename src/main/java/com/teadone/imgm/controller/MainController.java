@@ -6,6 +6,8 @@ import java.util.List;
 
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -42,10 +44,20 @@ public class MainController {
 		
 		return "index";
 	}
-	@GetMapping(value = { "/login" })
-	public String login() {
-		return "login";
-	}
+	/*
+	 * @GetMapping(value = { "/login" }) public String login() { return "login"; }
+	 */
+	
+	@RequestMapping("login")
+    public String login() {
+		log.debug("auth실행");
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        log.debug(auth.getPrincipal().toString());
+        return "login";
+    }
+	
+
+
 	@GetMapping(value = { "/regist" })
 	public String register() {
 		return "regist";
@@ -163,5 +175,9 @@ public class MainController {
 		model.put("post",boardservice.getPost(vo));
 
 		return "content";
+	}
+	@RequestMapping(value="personalInform")
+	public String personalInform() {
+		return "personalInform";
 	}
 }
