@@ -39,22 +39,31 @@ public class MainController {
 	private BoardService boardservice;
 	@GetMapping(value = { "/", "index" })
 	public String home(ModelMap modelmap) throws IOException {
+		
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		log.debug(auth.toString());
+		//log.debug("principal:"+auth.getPrincipal().toString());
+		//log.debug("credential:"+auth.getCredentials());
+		//log.debug("details:"+auth.getDetails());
+		//log.debug("name:" +auth.getName());
+		//log.debug("Authorites:" +auth.getAuthorities());
 		List<String> f=GetFileList.getImgFileList("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate");
 		modelmap.put("gImg",f);
 		
 		return "index";
 	}
-	/*
-	 * @GetMapping(value = { "/login" }) public String login() { return "login"; }
-	 */
 	
-	@RequestMapping("login")
-    public String login() {
-		log.debug("auth실행");
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        log.debug(auth.getPrincipal().toString());
-        return "login";
-    }
+	@GetMapping(value = { "/login" }) 
+	public String login() {
+		 return "login"; 
+	}
+	 
+	
+	/*
+	 * @RequestMapping("login") public String login() { log.debug("auth실행");
+	 * Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+	 * log.debug(auth.getPrincipal().toString()); return "login"; }
+	 */
 	
 
 
