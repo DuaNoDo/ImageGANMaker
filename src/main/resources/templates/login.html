@@ -215,13 +215,19 @@
                             <div class="newsletter-widget">
                                <p>Generate Wonderful Images!</p>
                                <br>
-                                <form class="form-inline" role="search" method="post" action="loginPro">
+                                <!-- <form class="form-inline" role="search" method="post" action="loginPro">
                                     <div class="form-1">
                                         <input type="text" name="MemId" class="form-control" placeholder="Email ">
                                         <input type="password" name="MemPw" class="form-control" placeholder="Password">
                                         <button type="submit" class="btn btn-primary"><i class="fa fa-paper-plane-o"></i></button>
                                     </div>
-                                </form>
+                                </form> -->
+                                <h3>Login with:</h3>
+								<div class="list-group">
+									<p th:each="url : ${urls}">
+										<a th:text="${url.key}" th:href="${url.value}" class="list-group-item active">Client</a>
+									</p>
+								</div>
                             </div>
                             <br><br>
                             <font size="6em" color="white"><a href="#">Find ID</a>/<a href="#">Find PW</a>/<a href="#">Regist</a></font>
