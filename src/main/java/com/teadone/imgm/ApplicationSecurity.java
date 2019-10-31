@@ -30,10 +30,13 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-
-		//http.antMatcher("/**").authorizeRequests().antMatchers("/**").permitAll().anyRequest().authenticated();
-		http.authorizeRequests()
-        .antMatchers("/**")
+		http.headers().frameOptions().disable();
+		//csrf라는 공격 기법을 차단 하기위하여 폼태그의 데이터들을 한번씩 검수. 그때문에 enable 하게되면 form에서 전송되는것들이 정상적으로 들어가지 않음.
+		http.csrf().disable();
+		
+		http
+		.authorizeRequests()
+        .antMatchers("/**/*","/*")
         .permitAll()
         .anyRequest()
         .authenticated()
@@ -49,17 +52,7 @@ public class ApplicationSecurity extends WebSecurityConfigurerAdapter {
         .and()
         .defaultSuccessUrl("/loginSuccess")
         .failureUrl("/loginFailure");
-		/*
-		 * http.antMatcher("/**").authorizeRequests().antMatchers("/",
-		 * "/login**").permitAll().anyRequest()
-		 * .authenticated().and().exceptionHandling() .authenticationEntryPoint(new
-		 * LoginUrlAuthenticationEntryPoint("/")).and() .addFilterBefore(ssoFilter(),
-		 * BasicAuthenticationFilter.class); // logout http.logout()
-		 * .invalidateHttpSession(true) .clearAuthentication(true)
-		 * .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-		 * .logoutSuccessUrl("/") .permitAll();
-		 */
-
+		
 	}
 
 		@Bean

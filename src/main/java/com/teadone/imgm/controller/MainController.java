@@ -1,11 +1,10 @@
 package com.teadone.imgm.controller;
 
-import java.io.File;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ResolvableType;
@@ -13,8 +12,6 @@ import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClientService;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
@@ -30,8 +27,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
-
-import com.teadone.imgm.ApplicationSecurity;
 import com.teadone.imgm.board.BoardService;
 import com.teadone.imgm.board.BoardVO;
 import com.teadone.imgm.image.ImageService;
@@ -58,22 +53,13 @@ public class MainController {
     private OAuth2AuthorizedClientService authorizedClientService;
     private static final String authorizationRequestBaseUri = "oauth2/authorize-client";
     Map<String, String> oauth2AuthenticationUrls = new HashMap<>();
-
+    private final String ImgDir="D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate";
     
 		
 	
 	@GetMapping(value = { "/", "index" })
 	public String home(ModelMap modelmap) throws IOException {
-
-		//Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-		//log.debug(auth.toString());
-		// log.debug("principal:"+auth.getPrincipal().toString());
-		// log.debug("credential:"+auth.getCredentials());
-		// log.debug("details:"+auth.getDetails());
-		// log.debug("name:" +auth.getName());
-		// log.debug("Authorites:" +auth.getAuthorities());
-		List<String> f = GetFileList
-				.getImgFileList("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate");
+		List<String> f = GetFileList.getImgFileList(ImgDir);
 		modelmap.put("gImg", f);
 
 		return "index";
@@ -90,13 +76,13 @@ public class MainController {
 
         clientRegistrations.forEach(registration -> oauth2AuthenticationUrls.put(registration.getClientName(), authorizationRequestBaseUri + "/" + registration.getRegistrationId()));
         model.addAttribute("urls", oauth2AuthenticationUrls);
-        log.debug("oauth2AuthenticationUrls:" + oauth2AuthenticationUrls);
-		
+     		
 		return "login";
 	}
 	@GetMapping("/loginSuccess")
     public String getLoginInfo(HttpSession session, OAuth2AuthenticationToken authentication) {
-
+		String email=null;
+		String name=null;
         OAuth2AuthorizedClient client = authorizedClientService.loadAuthorizedClient(authentication.getAuthorizedClientRegistrationId(), authentication.getName());
 
         String userInfoEndpointUri = client.getClientRegistration()
@@ -107,36 +93,36 @@ public class MainController {
         if (!StringUtils.isEmpty(userInfoEndpointUri)) {
             RestTemplate restTemplate = new RestTemplate();
             HttpHeaders headers = new HttpHeaders();
-            headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken()
-                .getTokenValue());
-
+            headers.add(HttpHeaders.AUTHORIZATION, "Bearer " + client.getAccessToken().getTokenValue());
             HttpEntity<String> entity = new HttpEntity<String>("", headers);
-
             ResponseEntity<Map> response = restTemplate.exchange(userInfoEndpointUri, HttpMethod.GET, entity, Map.class);
             Map userAttributes = response.getBody();
-            session.setAttribute("user", userAttributes.get("name"));
+            email=userAttributes.get("email").toString();
+            name =userAttributes.get("name").toString();
+            log.debug(userAttributes.toString());
+            MemberVO vo=new MemberVO();
+            vo.setMemId(email);
+            vo.setMemName(name);
+            
+            if(service.duplicateCheckMem(vo)==1) {
+            	session.setAttribute("user", userAttributes.get("email"));
+            }
+            else {
+            	service.join(vo);
+                session.setAttribute("user", userAttributes.get("email"));
+            }
+            
             
         }
 
         return "redirect:/";
-    }
-	/*
-	 * @RequestMapping("login") public String login() { log.debug("auth실행");
-	 * Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-	 * log.debug(auth.getPrincipal().toString()); return "login"; }
-	 */
+        
+	}
 
 	@GetMapping(value = { "/regist" })
 	public String register() {
 		return "regist";
 	}
-
-	/*
-	 * @RequestMapping(value = "/loginPro", method = RequestMethod.POST) public
-	 * String loginPro(MemberVO vo, HttpSession session) { if
-	 * (vo.getMemPw().equals(service.logIn(vo))) { session.setAttribute("user",
-	 * vo.getMemId()); return "redirect:/"; } else { return "login"; } }
-	 */
 
 	@RequestMapping(value = "/registPro", method = RequestMethod.POST)
 	public String regist(MemberVO vo) {
@@ -149,7 +135,9 @@ public class MainController {
 
 	@GetMapping(value = "logout")
 	public String logout(HttpSession session) {
+		
 		session.invalidate();
+		
 		return "redirect:/";
 	}
 
@@ -161,9 +149,9 @@ public class MainController {
 			return "login";
 	}
 
-	@RequestMapping(value = "/UploadPro", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "UploadPro", method = { RequestMethod.POST, RequestMethod.GET })
 	public String fileUpload(MultipartHttpServletRequest multipartHttpServletRequest, HttpSession session) {
-		if (session != null) {
+		if (session.getAttribute("user") != null) {
 			ImageVO vo = new ImageVO();
 			vo.setMemId(session.getAttribute("user").toString());
 			log.debug(Integer.toString(imgservice.fileUpload(multipartHttpServletRequest, vo)));
@@ -175,7 +163,7 @@ public class MainController {
 
 	@GetMapping(value = "myImage")
 	public String myImage(ModelMap model, HttpSession session) {
-		if (session != null) {
+		if (session.getAttribute("user") != null) {
 			ImageVO vo = new ImageVO();
 			vo.setMemId(session.getAttribute("user").toString());
 			model.put("gmImg", imgservice.getImageList(vo));
@@ -201,11 +189,10 @@ public class MainController {
 			return "login";
 	}
 
-	@RequestMapping(value = "/writePost", method = { RequestMethod.POST, RequestMethod.GET })
+	@RequestMapping(value = "writePost", method = { RequestMethod.POST, RequestMethod.GET })
 	public String writePost(MultipartHttpServletRequest multipartHttpServletRequest, HttpSession session, BoardVO vo) {
 		if (session != null) {
 			vo.setMemId(session.getAttribute("user").toString());
-			log.debug(Integer.toString(boardservice.writePost(vo)));
 
 			return "redirect:/";
 		} else
@@ -214,10 +201,10 @@ public class MainController {
 
 	@GetMapping(value = "recentImage")
 	public String recentImage(ModelMap model, HttpSession session) {
-
-		// model.put("gmImg", imgservice.getRecentImageList());
-
-		return "myImage";
+//		model.put("gmImg", imgservice.getRecentImageList());
+//		List<String> f = GetFileList.getImgFileList(ImgDir);
+		
+		return "recentImage";
 	}
 
 	@GetMapping(value = "myGenerateImage")
@@ -225,19 +212,14 @@ public class MainController {
 		if (session != null) {
 			ImageVO vo = new ImageVO();
 			vo.setMemId(session.getAttribute("user").toString());
-			// model.put("gmImg",
-			// imgservice.getRecentImageList("D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate",vo));
-			model.put("gmImg",
-					GetFileList.getRecentFileList(
-							"D:\\SpringWorks\\ImageGANMaker\\src\\main\\resources\\static\\Generate",
-							imgservice.getImageList(vo)));
+			model.put("gmImg",GetFileList.getRecentFileList(ImgDir,imgservice.getImageList(vo)));
 			return "myGenerateImage";
 		} else {
 			return "login";
 		}
 	}
 
-	@RequestMapping(value = "/board/{num}")
+	@RequestMapping(value = "board/{num}")
 	public String getContent(@PathVariable int num, ModelMap model) {
 		BoardVO vo = new BoardVO();
 		vo.setNum(num);

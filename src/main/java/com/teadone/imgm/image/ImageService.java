@@ -80,9 +80,12 @@ public class ImageService implements ImageMapper {
 		return mapper.getImageList(vo);
 	}
 	
-	/*
-	 * @Override public List<String> getRecentImageList(String path, ImageVO vo){
-	 * return GetFileList.getRecentFileList(path,mapper.getImageList(vo)); }
-	 */
+	
+	 //@Override 
+//	 public List<String> getRecentImageList(String path, ImageVO vo){
+	 
+//		 return GetFileList.getRecentFileList(path,mapper.getImageList(vo)); 
+//		 }
+	 
 
 }
