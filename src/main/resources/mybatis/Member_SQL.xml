@@ -6,7 +6,7 @@
 		
 	<insert id="join" parameterType="MemberVO">
 		insert into member 
-		values(#{MemId},#{MemPw},#{MemName},now())
+		values(#{MemId},#{MemName},now())
 	</insert> 
 
 	<select id="duplicateCheckMem" parameterType="MemberVO" resultType="int">
