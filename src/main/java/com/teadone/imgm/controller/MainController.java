@@ -106,10 +106,12 @@ public class MainController {
             
             if(service.duplicateCheckMem(vo)==1) {
             	session.setAttribute("user", userAttributes.get("email"));
+            	session.setAttribute("userAtt", userAttributes);
             }
             else {
             	service.join(vo);
                 session.setAttribute("user", userAttributes.get("email"));
+                session.setAttribute("userAtt", userAttributes);
             }
             
             
@@ -176,7 +178,7 @@ public class MainController {
 
 	@GetMapping(value = "board")
 	public String board(ModelMap model) {
-
+		
 		model.put("post", boardservice.getPosts());
 		return "board";
 	}
@@ -199,13 +201,13 @@ public class MainController {
 			return "login";
 	}
 
-	@GetMapping(value = "recentImage")
-	public String recentImage(ModelMap model, HttpSession session) {
+//	@GetMapping(value = "recentImage")
+//	public String recentImage(ModelMap model, HttpSession session) {
 //		model.put("gmImg", imgservice.getRecentImageList());
 //		List<String> f = GetFileList.getImgFileList(ImgDir);
 		
-		return "recentImage";
-	}
+//		return "recentImage";
+//	}
 
 	@GetMapping(value = "myGenerateImage")
 	public String myGenerateImage(ModelMap model, HttpSession session) throws IOException {
@@ -231,5 +233,14 @@ public class MainController {
 	@RequestMapping(value = "personalInform")
 	public String personalInform() {
 		return "personalInform";
+	}
+	
+	@RequestMapping(value = "mypage")
+	public String mypage(HttpSession session, ModelMap model) {
+		log.debug(session.getAttribute("userAtt").toString());
+		model.addAttribute("userAtt",session.getAttribute("userAtt"));
+		
+		return "mypage";
+		
 	}
 }

@@ -141,7 +141,7 @@
                                 <ul class="sub-menu center-content">
                                     <li><a href="upload">Upload Image</a></li>
                                     <li><a href="myImage">My Upload History</a></li>
-                                    <li><a href="myResult">My Result</a></li>
+                                    
                                 </ul>
                             </div>
                         </li>
@@ -179,7 +179,7 @@
                         	</a>
 						</li>
                     	<li>
-                        	<a th:href="${session.user==null}? @{regist} : @{logout}">
+                        	<a th:href="${session.user==null}? @{https://accounts.google.com/signup} : @{logout}">
                         		<span th:text="${session.user==null}? 'REGIST' : 'LOG OUT'"></span>
                         	</a>
                         </li>    
@@ -210,18 +210,17 @@
             <div class="ui middle aligned center aligned grid">
 		        <div class="column">
 		            <h2 class="ui teal image header">
-		                게시판
+		                <center>게시판</center>
 		            </h2>
 		            <div class="ui large form">
-		                <div class="ui stacked segment">
+		                <div class="ui stacked segment" style="margin-left:15px;">
 		                    <a href="/boardWrite"><button class="ui fluid large teal submit button">게시글 작성하기</button></a>
 		                    <table class="ui celled table">
 		                        <thead>
 		                            <tr>
 		                                <th>#</th>
 		                                <th>제목</th>
-		                                <th>등록자</th>
-		                                <th>내용</th>
+		                                <th>등록자</th>		                                
 		                                <th>등록일</th>
 		                                <th>조회수</th>
 		                            </tr>
@@ -231,21 +230,17 @@
 			                        	<th><span th:text="${post.num}"></span></th>
 			                        	<th><span th:text="${post.title}"></span></th>
 			                        	<th><span th:text="${post.MemId}"></span></th>
-			                        	<th><span th:text="${post.content}"></span></th>
 			                        	<th><span th:text="${post.RegTime}"></span></th>
 			                        	<th><span th:text="${post.read}"></span></th>
 			                        </tr>
 		                        </tbody>
 		                    </table>
+		                    <span th:text="${post.content}"></span>
 		                </div>
-		 
-		                <div class="ui error message"></div>
-		 
 		            </div>
 		        </div>
 		    </div>
         </div>
-
         
         <div class="section copyrights">
             <div class="container">
@@ -278,8 +273,6 @@
     <script th:src="@{/js/masonry.js}" src="js/masonry.js"></script>
     <script th:src="@{/js/masonry-4-col.js}" src="js/masonry-4-col.js"></script>
     <!-- VIDEO BG PLUGINS -->
-
-  
 
 </body>
 </html>

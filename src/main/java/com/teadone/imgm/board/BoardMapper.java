@@ -1,6 +1,7 @@
 package com.teadone.imgm.board;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -9,4 +10,5 @@ public interface BoardMapper {
 	public List<BoardVO> getPosts();
 	public BoardVO getPost(BoardVO vo);
 	public int writePost(BoardVO vo);
+
 }

@@ -205,110 +205,29 @@
     </div><!-- end menu-wrapper -->
 
     <div id="wrapper">
-
-        <div id="home" class="video-section js-height-full">
-            <div class="overlay"></div>
-            <div class="home-text-wrapper relative container">
-                <div class="home-message">
-                    <img src="images/biglogo.png" alt="">
-                    <p>GAN Image Generator</p>
-                    인공지능을 이용한 8비트 이미지 생성기!
-                    <div class="btn-wrapper">
-                        <div class="text-center">
-                            
-                        </div>
-                    </div><!-- end row -->
-                </div>
-            </div>
-        </div>
-
-        <div class="section bgcolor noover">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="tagline-message">
-                            
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </div><!-- end section -->
-
-        <section class="section lb nopadtop noover">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <h3>쉽고 빠른 생성</h3>
-                            <p>기본 이미지를 8비트 픽셀 이미지로 바꿔줍니다! 하지만 이것이 머신러닝을 통해 생성한 것입니다!.</p>
-                        </div>
-                    </div><!-- end col -->
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <h3>파이썬 + Spring의 조합!</h3>
-                            <p>겁나 쉬워보이지만 이거저거 붙일때 굉장히 역겨웠습니다!</p>
-                        </div>
-                    </div><!-- end col -->
-
-                    <div class="col-lg-4 col-md-12">
-                        <div class="service-box m30">
-                            <h3>어떻게 돌아가는 몰라도 됩니다!.</h3>
-                            <p>단지 회원가입 로그인 그리고 이미지 업로드만 하면 20초내로 새로운 이미지가 생성됩니다!</p>
-                        </div>
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
+		
+        <section class="section lb" align="center" style="font-size:28px; color:black;">
+        
+        <center>내정보</center>
+        <br>
+        <br>
+			<table class="ui celled table" >
+				<tr>
+					<td>이메일</td><td th:text="${userAtt.email}"></td>
+				</tr>
+				<tr>
+					<td>이름</td><td th:text="${userAtt.name}"></td>
+				</tr>
+				<tr>
+					<td>이미지</td><td > <image th:src="${userAtt.picture}" width="200px" height="200px"/></td>
+				</tr>
+				<tr>
+					<td>국가</td><td th:text="${userAtt.locale}"></td>		
+				</tr>
+			</table>
+			
         </section><!-- end section -->
 
-
-        <section class="section lb">
-            <div class="container">
-                <div class="section-title text-center">
-                    <h3>Recent Works</h3>
-                    <p>Maecenas sit amet tristique turpis. Quisque porttitor eros quis leo pulvinar, at hendrerit sapien iaculis. Donec consectetur accumsan arcu, sit amet fringilla ex ultricies.</p>
-                </div><!-- end title -->
-
-                <div class="case-top clearfix">
-                    <div class="pull-left hidden-xs">
-                        <p>Showing 1–12 of 24 results</p>
-                    </div><!-- end col -->
-
-                    <div class="pull-right">
-                        <div class="dropdown portfolio-filter">
-                            <button class="btn btn-custom dropdown-toggle" type="button" data-toggle="dropdown">Product Filter
-                            <span class="fa fa-angle-down"></span></button>
-                            <ul class="dropdown-menu">
-                                <li><a class="active" href="#" data-filter="*">All Images</a></li>
-                                <li><a class="" href="#" data-filter=".cat1">8bit Image</a></li>
-                                <li><a class="" href="#" data-filter=".cat2">Van Gogh</a></li>
-                                <li><a class="" href="#" data-filter=".cat3">Red to Orange</a></li>
-                            </ul>
-                        </div><!-- end dropdown -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="portfolio row with-desc">
-                            
-                            <div th:each="image : ${gImg}" class="post-media pitem item-w1 item-h1 cat1">
-                                <div class="entry">
-                                    <img th:src="${image}" alt="없는 이미지넹" class="img-responsive">
-                                    <div class="magnifier">
-                                        <a class="golink" href="#">
-                                           <i class="fa fa-link"></i>
-                                        </a>
-                                    </div><!-- end magnifier -->
-                                </div><!-- end entry -->
-                            </div><!-- end post-media -->
-                            
-                            
-                        </div><!-- end row -->
-                    </div><!-- end col -->
-                </div><!-- end row -->
-            </div><!-- end container -->
-        </section><!-- end section -->
         
         <footer class="section footer">
             <div class="container">
@@ -382,7 +301,7 @@
                     <div class="col-lg-9 col-md-9 text-right">
                         <div class="cop-links">
                             <ul class="list-inline">
-                                <li>&copy; 2019 teadone </li>
+                      			<li>&copy; 2019 teadone </li>
                                 <li><a href="/personalInform">개인정보 처리방침 </a></li>
                             </ul>
                         </div>

@@ -6,7 +6,7 @@
 		
 	<insert id="insertImage" parameterType="ImageVO">
 		insert into image 
-		values(null,#{MemId},#{OriginalName},#{SaveName},now())
+		values(null,#{MemId},#{OriginalName},#{SaveName},now(),0)
 	</insert> 
 	<select id="getImageList" parameterType="ImageVO" resultType="String">
 		select concat('Upload/' ,SaveName) from image

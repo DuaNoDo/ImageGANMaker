@@ -193,7 +193,7 @@
                         	</a>
 						</li>
                     	<li>
-                        	<a th:href="${session.user==null}? @{regist} : @{logout}">
+                        	<a th:href="${session.user==null}? @{https://accounts.google.com/signup} : @{logout}">
                         		<span th:text="${session.user==null}? 'REGIST' : 'LOG OUT'"></span>
                         	</a>
                         </li>    

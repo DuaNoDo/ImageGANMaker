@@ -141,7 +141,7 @@
                                 <ul class="sub-menu center-content">
                                     <li><a href="upload">Upload Image</a></li>
                                     <li><a href="myImage">My Upload History</a></li>
-                                    <li><a href="myResult">My Result</a></li>
+                                    
                                 </ul>
                             </div>
                         </li>
@@ -179,7 +179,7 @@
                         	</a>
 						</li>
                     	<li>
-                        	<a th:href="${session.user==null}? @{regist} : @{logout}">
+                        	<a th:href="${session.user==null}? @{https://accounts.google.com/signup} : @{logout}">
                         		<span th:text="${session.user==null}? 'REGIST' : 'LOG OUT'"></span>
                         	</a>
                         </li>    
@@ -215,7 +215,7 @@
 		            <div class="ui large form">
 		                <div class="ui stacked segment">
 		                    
-		                    <table class="ui celled table">
+		                    <table class="ui celled table" style="margin-left:15px;">
 		                        <thead>
 		                            <tr>
 		                                <th>#</th>
@@ -239,7 +239,15 @@
 		                </div>
 		 
 		                <div class="ui error message"></div>
-		 
+		                <ul class="pagination">
+							<li class="disabled"><a><<</a></li>
+							<li class="disabled"><a><</a></li>
+							<li class="disabled active"><a>1</a></li>							
+							<li class="goPage" data-page="2"><a>2</a></li>							
+							<li class="goPage" data-page="3"><a>3</a></li>
+							<li class="disabled"><a>></a></li>							
+							<li class="goLastPage"><a>>></a></li>
+						</ul> 
 		            </div>
 		        </div>
 		    </div>
